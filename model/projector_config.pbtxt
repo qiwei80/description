@@ -1,0 +1,8 @@
+embeddings {
+  tensor_name: "seq2seq/encoder/w_embs:0"
+  metadata_path: "seq2seq_encoder_w_embs.txt"
+}
+embeddings {
+  tensor_name: "seq2seq/decoder/w_embs:0"
+  metadata_path: "seq2seq_decoder_w_embs.txt"
+}
