@@ -1,0 +1,17 @@
+WARNING:tensorflow:From /usr/local/lib/python3.6/dist-packages/tensorflow/contrib/learn/python/learn/datasets/base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+Traceback (most recent call last):
+  File "/usr/local/bin/onmt-main", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.6/dist-packages/opennmt/bin/main.py", line 119, in main
+    config = load_config(args.config)
+  File "/usr/local/lib/python3.6/dist-packages/opennmt/config.py", line 113, in load_config
+    subconfig = yaml.load(config_file.read())
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/lib/io/file_io.py", line 120, in read
+    self._preread_check()
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/lib/io/file_io.py", line 80, in _preread_check
+    compat.as_bytes(self.__name), 1024 * 512, status)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/framework/errors_impl.py", line 516, in __exit__
+    c_api.TF_GetCode(self.status.status))
+tensorflow.python.framework.errors_impl.NotFoundError: config/opennmt-defaults.yml; No such file or directory

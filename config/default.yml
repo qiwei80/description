@@ -1,0 +1,9 @@
+model_dir: model
+
+data:
+  train_features_file: data/src_coat_train.csv
+  train_labels_file: data/tgt_coat_train.csv
+  eval_features_file: data/src_coat_eval.csv
+  eval_labels_file: data/tgt_coat_eval.csv
+  source_words_vocabulary: data/src-vocab.txt
+  target_words_vocabulary: data/tgt-vocab.txt
