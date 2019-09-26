@@ -1,2 +1,2 @@
 # description
-for description project
+This is a project for automatic descript creation
