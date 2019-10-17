@@ -109,7 +109,7 @@ def create_description(path):
                             "on the standard output."))
     parser.add_argument("--log_prediction_time", default=False, action="store_true",
                       help="Logs some prediction time metrics.")
-    parser.add_argument("--checkpoint_path", default='model/model.ckpt-500000',
+    parser.add_argument("--checkpoint_path", default='model/model.ckpt-600000',
                       help=("Checkpoint or directory to use for inference or export "
                             "(when a directory is set, the latest checkpoint is used)."))
     parser.add_argument("--export_dir_base", default=None,
