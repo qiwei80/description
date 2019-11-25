@@ -6,7 +6,7 @@
 import codecs
 import random
 def uniq_text(text,season):
-    print (text)
+    #print (text)
     season_str=["春","夏","秋","冬"]
     for i in range(0,len(text)-1):
         text[i] = text[i].strip("\n")
@@ -36,9 +36,9 @@ def uniq_text(text,season):
 #            print ("len j:",len(set(text[j].replace("。","").split(" "))))
 #            print ("len i+j:",len(set(text[i].replace("。","").split(" ")+text[j].replace("。","").split(" "))))
             #similar condition miss 2019/11/13
-            length_i = len(set(text[i].replace("。","").replace(",","").split(" ")))
-            length_j = len(set(text[j].replace("。","").replace(",","").split(" ")))
-            length_ij = len(set(text[i].replace("。","").replace(",","").split(" ") +text[j].replace("。","").replace(",","").split(" ")))
+            length_i = len(set(text[i].replace("。","").replace(",","").replace("<unk>","").split(" ")))
+            length_j = len(set(text[j].replace("。","").replace(",","").replace("<unk>","").split(" ")))
+            length_ij = len(set(text[i].replace("。","").replace(",","").replace("<unk>","").split(" ") +text[j].replace("。","").replace(",","").split(" ")))
             #print ("length_i:",length_i)
             #print ("length_j:",length_j)
             #print ("length_ij:",length_ij)
@@ -75,7 +75,7 @@ def normalize(of_name,string):
                     text.append(lines[i])
                     se_flag = True
                     break
-            if "サイズ" not in lines[i] and "色" not in lines[i] and "カラー" not in lines[i]:
+            if ("サイズ" not in lines[i] and "色" not in lines[i] and "カラー" not in lines[i] and "SIZE" not in lines[i] and "size" not in lines[i] and "素材" not in lines[i] and "％" not in lines[i]) or ("100％" in lines[i] and "素材" not in lines[i]):
                 text_s.append(lines[i])
         if not se_flag and len(string["material"]) > 0:
 #            print (string["material"])
@@ -130,18 +130,18 @@ def normalize(of_name,string):
     se_flag = False
     if string["sleeve"] != "":
         for i in range(count,count+5):
-            if "袖" in lines[i] and "サイズ" not in lines[i]:
+            if "袖" in lines[i] and "サイズ" not in lines[i] and "袖部分" not in lines[i] and "袖丈" not in lines[i]:
                 text.append(lines[i])
                 se_flag = True
                 break
-            if "サイズ" not in lines[i] and "色" not in lines[i] and "カラー" not in lines[i] and "素材" not in lines[i]:
+            if "サイズ" not in lines[i] and "色" not in lines[i] and "カラー" not in lines[i] and "素材" not in lines[i] and "SIZE" not in lines[i] and "size" not in lines[i]:
                 text_s.append(lines[i])
         count += 5
     se_flag = False
     if len(string["color"]) > 0:
         for i in range(count,count+5):
             #modified 2019/10/3 カラー情報だけの生成文除外するのため
-            if "色" in lines[i] or "カラー" in lines[i] or "素材" in lines[i] or "サイズ" in lines[i]:
+            if "色" in lines[i] or "カラー" in lines[i] or "素材" in lines[i] or "サイズ" in lines[i] and "SIZE" not in lines[i] and "size" not in lines[i]:
                 #text.append(lines[i])
                 #break
                 pass
@@ -182,6 +182,34 @@ def normalize(of_name,string):
         description = description + "".join(line.split(" "))
         if description[-1] != "。":
             description = description + "。"
+    if string["sleeve"] in ["7分袖","７分袖","七分袖"]:
+        while "半袖" in description:
+            description = description.replace("半袖","七分袖")
+        while "三分袖" in description:
+            description = description.replace("三分袖","七分袖")
+        while "五分袖" in description:
+            description = description.replace("五分袖","七分袖")
+    if string["sleeve"] in ["５分袖","5分袖","五分袖"]:
+        while "半袖" in description:
+            description = description.replace("半袖","五分袖")
+        while "三分袖" in description:
+            description = description.replace("三分袖","五分袖")
+        while "七分袖" in description:
+            description = description.replace("七分袖","五分袖")
+    if string["sleeve"] in ["3分袖","３分袖","三分袖"]:
+        while "半袖" in description:
+            description = description.replace("半袖","三分袖")
+        while "七分袖" in description:
+            description = description.replace("七分袖","三分袖")
+        while "五分袖" in description:
+            description = description.replace("五分袖","三分袖")
+    if string["sleeve"] in ["半袖"]:
+        while "七分袖" in description:
+            description = description.replace("七分袖","半袖")
+        while "三分袖" in description:
+            description = description.replace("三分袖","半袖")
+        while "五分袖" in description:
+            description = description.replace("五分袖","半袖")
     while " " in description:
         description = description.replace(" ","")
     while ",," in description:

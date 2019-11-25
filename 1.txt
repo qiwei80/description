@@ -1,0 +1,1 @@
+{"category1": "レディース", "category2": "トップス", "category3": "ブラウス", "material": ["コットン"], "season": ["春", "夏", "秋"], "name1": "", "name2": "", "sleeve": "7分袖", "feature": "", "color": ["ブルー", "白"], "size": "フリー"}
