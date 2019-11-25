@@ -204,17 +204,17 @@ def create_description(path):
     if args.session_config is not None:
         with open(args.session_config, "rb") as session_config_file:
             text_format.Merge(session_config_file.read(), session_config)
-    #try:
-    if True:
+    try:
+    #if True:
         #add 11/25,change json string to file
         with open(args.json,"r") as load_f:
         #data = json.loads(args.json)
             data = json.load(load_f)
 #        print (data["category1"])
         savedata(data,path)
-#    except:
-#        print ("json is incorrected")
-#        exit(1)
+    except:
+        print ("json is incorrected")
+        exit(1)
     runner = Runner(
       model,
       config,
